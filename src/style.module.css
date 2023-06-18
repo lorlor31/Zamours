@@ -1,0 +1,87 @@
+:root{
+    --colorMain : #0c134faf;
+    --color2nd : #1d277d9c ;
+    --color3rd : #5c469ca6 ;
+    --color4th : #D4ADFC ;
+}
+.main{
+    display : flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.identification {
+    display : flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 80vh;
+    background-image: url("../public/parrots-1729965_12802.jpg");
+    background-size: cover;
+    padding: 20px;
+    margin: 10vh 10vw;
+    color: var(--color4th) ;
+    font-size: xx-large;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif ;
+    border-radius: 5%;
+}
+
+.bonjour {
+    display : flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 20vh;
+    background-color: var(--colorMain) ;
+}
+.component {
+    display : flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-family: cursive;
+    /* background-color: rgb(0, 191, 216); */
+    background-color: var(--color2nd);
+    padding: 1rem;
+    width: 80vw;
+    height: 50vh;
+    margin: 1rem;
+
+}
+
+.notDisplayed{
+    display: none;
+}
+
+
+form {
+    display : flex ;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* background-color: rgba(25, 29, 147, 0.209); */
+    background-color: var(--colorMain) ;
+    color: rgba(240, 255, 255, 0.775);
+    border-radius: 5%;
+}
+input{
+    background-color: var(--color3rd);
+    background-color: rgba(227, 124, 205, 0.3);
+    border-radius: 5px;
+    padding: 5px;
+    margin : 1rem ;
+    color: rgba(240, 255, 255, 0.804);
+}
+
+label{
+
+    background-color: rgba(242, 69, 138, 0.19);
+    border-radius: 5px 15px;
+    padding: 1rem;
+    margin : 1rem ;
+}
