@@ -87,30 +87,47 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
     const answersMemo =  localStorage.getItem("answers")
     // Déclaration des states crrspdts aux réponses
 
-    let tabAnswers= {"answA":"ter","answB":"erte","answC":questionsC[x].reponse[0],"answD":"bgb","answE":"hfg"}
+    let tabAnswers= {"answA":"ter","answB":"erte","answC":questionsC[x].reponse[0]}
     const [answers,setAnswers]=useState(tabAnswers)  
+    const [answers2,setAnswers2]=useState(tabAnswers)  
 
     function handleSubmit  (event) {
         event.preventDefault() ;
-        (event)=>saveAnswers(event, "answA");
-        (event)=>saveAnswers(event, "answB");
-        const answersMemo =  localStorage.getItem("answers")
-        console.log("reponses mémoriséez", answersMemo )
-        setQuestion("question2M")
-        let nextShowStatus={...showStatus}
-        nextShowStatus.formM2ShowStatus=true 
-        nextShowStatus.formFShowStatus=false  
-        setShowStatus(nextShowStatus)
+        if (showStatus.formFShowStatus=true) {
+            const answersMemo =  localStorage.getItem("answers")
+            console.log("reponses mémoriséez", answersMemo )
+            setQuestion("question2M")
+            let nextShowStatus={...showStatus}
+            nextShowStatus.formM2ShowStatus=true 
+            nextShowStatus.formFShowStatus=false  
+            setShowStatus(nextShowStatus)
+        }
+        else if (showStatus.formM2ShowStatus=true) {
+            const answersMemo =  localStorage.getItem("answers")
+            const answersMemo2 =  localStorage.getItem("answers2")
+            console.log("reponses mémoriséezF", answersMemo, "reponses mémoriséezM", answersMemo2 )
+        }
     }
 
     function saveAnswers(event,answer){
-        let nextAnswers={...answers}
+        if (showStatus.formFShowStatus=true) {
+           let nextAnswers={...answers}
         nextAnswers[answer]=event.target.value
         setAnswers(nextAnswers)
         let answersText=JSON.stringify(nextAnswers)
         localStorage.setItem("answers",answersText)
-        console.log("coucou" , answersText)
+        console.log("reponses1" , answersText) 
+        }
+        else if (showStatus.formM2ShowStatus=true){
+            let nextAnswers2={...answers2}
+        nextAnswers2[answer]=event.target.value
+        setAnswers2(nextAnswers2)
+        let answersText2=JSON.stringify(nextAnswers2)
+        localStorage.setItem("answers2",answersText2)
+        console.log("reponses2" , answersText2) 
+        }
     }
+
   
     return(
         
@@ -118,30 +135,30 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
         <> 
         <form onSubmit={handleSubmit}>
 
-    <label htmlFor='questA'> {questionsA[x][question]}</label> 
-    <input type="text" id='questA' value={answA} 
-    onChange={(event)=>saveAnswers(event, "answA")}/>
-    <br/> 
+            <label htmlFor='questA'> {questionsA[x][question]}</label> 
+            <input type="text" id='questA' value={answA} 
+            onChange={(event)=>saveAnswers(event, "answA")}/>
+            <br/> 
 
-    <label htmlFor='questB'> {questionsB[x].question}</label> 
-    <label htmlFor='questBChoix1'> Oui </label> 
-    <input type="radio" name='questB' id='questBChoix1' value="oui" checked={answers.answB==="oui"} 
-    onChange={(event)=>saveAnswers(event, "answB")}/>
-    <label htmlFor='questBChoix2'> Non </label> 
-    <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={answers.answB==="non"}  
-    onChange={(event)=>saveAnswers(event, "answB")}/>
-    <br/> 
+            <label htmlFor='questB'> {questionsB[x].question}</label> 
+            <label htmlFor='questBChoix1'> Oui </label> 
+            <input type="radio" name='questB' id='questBChoix1' value="oui" checked={answers.answB==="oui"} 
+            onChange={(event)=>saveAnswers(event, "answB")}/>
+            <label htmlFor='questBChoix2'> Non </label> 
+            <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={answers.answB==="non"}  
+            onChange={(event)=>saveAnswers(event, "answB")}/>
+            <br/> 
 
-    <label htmlFor='questC'>{questionsC[x].question}</label> 
-    <select name="questCChoix1" id="questCChoix1" value={answC}
-    onChange={(event)=>saveAnswers(event, "answC")}> 
-    {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}
-    </select> 
-    <br/> 
+            <label htmlFor='questC'>{questionsC[x].question}</label> 
+            <select name="questCChoix1" id="questCChoix1" value={answC}
+            onChange={(event)=>saveAnswers(event, "answC")}> 
+            {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}
+            </select> 
+            <br/> 
 
-    <button onSubmit={handleSubmit}> Valider !</button>
+            <button onSubmit={handleSubmit}> Valider !</button>
 
-</form>
+        </form>
         
         </> 
     )
