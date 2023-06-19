@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './style.module.css'
 
 
-
+//coucou
 //a noter : ne pas déclarer toutes les variables à l'inter du composant, baanane
 // bien initialiser le state de type "select" avec une valeur d'une des options 
 let x =parseInt(Math.floor(Math.random()*10))
