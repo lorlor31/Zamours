@@ -93,7 +93,8 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
 
     function handleSubmit  (event) {
         event.preventDefault() ;
-        if (showStatus.formFShowStatus=true) {
+        console.log(showStatus)
+        if (showStatus.formFShowStatus==true) {
             const answersMemo =  localStorage.getItem("answers")
             console.log("reponses mémoriséez", answersMemo )
             setQuestion("question2M")
@@ -102,7 +103,7 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             nextShowStatus.formFShowStatus=false  
             setShowStatus(nextShowStatus)
         }
-        else if (showStatus.formM2ShowStatus=true) {
+        else if (showStatus.formM2ShowStatus==true) {
             const answersMemo =  localStorage.getItem("answers")
             const answersMemo2 =  localStorage.getItem("answers2")
             console.log("reponses mémoriséezF", answersMemo, "reponses mémoriséezM", answersMemo2 )
@@ -110,7 +111,7 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
     }
 
     function saveAnswers(event,answer){
-        if (showStatus.formFShowStatus=true) {
+        if (showStatus.formFShowStatus==true) {
            let nextAnswers={...answers}
         nextAnswers[answer]=event.target.value
         setAnswers(nextAnswers)
@@ -118,7 +119,7 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
         localStorage.setItem("answers",answersText)
         console.log("reponses1" , answersText) 
         }
-        else if (showStatus.formM2ShowStatus=true){
+        else if (showStatus.formM2ShowStatus==true){
             let nextAnswers2={...answers2}
         nextAnswers2[answer]=event.target.value
         setAnswers2(nextAnswers2)
@@ -140,7 +141,7 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             onChange={(event)=>saveAnswers(event, "answA")}/>
             <br/> 
 
-            <label htmlFor='questB'> {questionsB[x].question}</label> 
+            <label htmlFor='questB'> {questionsB[x][question]}</label> 
             <label htmlFor='questBChoix1'> Oui </label> 
             <input type="radio" name='questB' id='questBChoix1' value="oui" checked={answers.answB==="oui"} 
             onChange={(event)=>saveAnswers(event, "answB")}/>
@@ -149,7 +150,7 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             onChange={(event)=>saveAnswers(event, "answB")}/>
             <br/> 
 
-            <label htmlFor='questC'>{questionsC[x].question}</label> 
+            <label htmlFor='questC'>{questionsC[x][question]}</label> 
             <select name="questCChoix1" id="questCChoix1" value={answC}
             onChange={(event)=>saveAnswers(event, "answC")}> 
             {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}

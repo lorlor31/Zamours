@@ -19,7 +19,7 @@ function App(){
 		"identificationShowStatus" : true , 
 		"bonjourShowStatus" : false , 
 		"genreShowStatus" : false ,
-		"formFShowStatus" : false,
+		"formFShowStatus" : true,
 		"formMShowStatus" : false,
 		"questionsFShowStatus" : true ,
 		"formM2ShowStatus" : false 
@@ -30,14 +30,14 @@ function App(){
 	<div className={styles.main}>
 	{/* à mettre entre accolades pour travailler que sur le questionnaire  */}
 	
-	<Identification name={name} setName={setName} showStatus={showStatus} setShowStatus={setShowStatus} />
+	{/* <Identification name={name} setName={setName} showStatus={showStatus} setShowStatus={setShowStatus} />
 	<Bonjour nameMemo={nameMemo} showStatus={showStatus} setShowStatus={setShowStatus}  />
 	<Genre genre={genre} setGenre={setGenre} showStatus={showStatus} setShowStatus={setShowStatus}/>
 	<FormF question={question} setQuestion={setQuestion}  nameMemo={nameMemo} answers={answers} setAnswers={setAnswers} showStatus={showStatus} setShowStatus={setShowStatus}/>  
-	<FormM2 question={question} setQuestion={setQuestion}   answers={answers} setAnswers={setAnswers} showStatus={showStatus} setShowStatus={setShowStatus}/>  
+	<FormM2 question={question} setQuestion={setQuestion}   answers={answers} setAnswers={setAnswers} showStatus={showStatus} setShowStatus={setShowStatus}/>   */}
 	
 	
-	{/* // <Questions showStatus={showStatus} setShowStatus={setShowStatus}/> */}
+	// <Questions question={question} setQuestion={setQuestion} showStatus={showStatus} setShowStatus={setShowStatus}/>
 	</div>
 	)
 
