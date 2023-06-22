@@ -9,7 +9,7 @@ export function FormM2 ({answers, setAnswers,showStatus,setShowStatus,question,s
         <> 
         <div>
             Madame a fait sa part du travail, on va voir si tu la connais bien ! Réponds au mieux !
-        <Questions question={question} setQuestion={setQuestion} showStatus={showStatus} setShowStatus={setShowStatus}/>    
+        <Questions question="question2M" setQuestion={setQuestion} showStatus={showStatus} setShowStatus={setShowStatus}/>    
         </div>
         
         </>

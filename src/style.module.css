@@ -85,3 +85,19 @@ label{
     padding: 1rem;
     margin : 1rem ;
 }
+
+.questions{
+    margin: 1rem ;
+}
+
+.questionsSyntheseScore {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.reponseNeutre {
+    background-color: rgb(250, 118, 140) ;
+    
+}

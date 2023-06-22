@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './style.module.css'
 import {Questions} from "./questions"
 
-export function FormF ({nameMemo, answers, setAnswers,showStatus,setShowStatus,setQuestion, question}) {
+export function FormF ({nameMemo, answers, setAnswers,showStatus,setShowStatus, question,setQuestion}) {
     
     return (
     showStatus.formFShowStatus==false ? null :   

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import styles from './style.module.css'
 
-
-//coucou
 //a noter : ne pas déclarer toutes les variables à l'inter du composant, baanane
 // bien initialiser le state de type "select" avec une valeur d'une des options 
-let x =parseInt(Math.floor(Math.random()*10))
-let answA, answB, answC,answD,answE
+export let x =parseInt(Math.floor(Math.random()*10))
+
+let answA, answB, answC
+let reponseStyle="reponseNeutre"
 
 let questionsA = 
     [
@@ -93,10 +93,8 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
 
     function handleSubmit  (event) {
         event.preventDefault() ;
-        console.log(showStatus)
         if (showStatus.formFShowStatus==true) {
             const answersMemo =  localStorage.getItem("answers")
-            console.log("reponses mémoriséez", answersMemo )
             setQuestion("question2M")
             let nextShowStatus={...showStatus}
             nextShowStatus.formM2ShowStatus=true 
@@ -107,6 +105,10 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             const answersMemo =  localStorage.getItem("answers")
             const answersMemo2 =  localStorage.getItem("answers2")
             console.log("reponses mémoriséezF", answersMemo, "reponses mémoriséezM", answersMemo2 )
+            let nextShowStatus={...showStatus}
+            nextShowStatus.formM2ShowStatus=false 
+            nextShowStatus.questionsSyntheseScore=true  
+            setShowStatus(nextShowStatus)
         }
     }
 
@@ -132,26 +134,26 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
   
     return(
         
-        showStatus.questionsShowStatus==false ? null : 
+        //showStatus.questionsShowStatus==false ? null : 
         <> 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.questions}>
 
             <label htmlFor='questA'> {questionsA[x][question]}</label> 
-            <input type="text" id='questA' value={answA} 
+            <input type="text" id='questA' value={answA} className={styles[reponseStyle]}//à rectifier mais comment
             onChange={(event)=>saveAnswers(event, "answA")}/>
             <br/> 
 
             <label htmlFor='questB'> {questionsB[x][question]}</label> 
-            <label htmlFor='questBChoix1'> Oui </label> 
+            <label htmlFor='questBChoix1'className={styles[reponseStyle]}> Oui </label> 
             <input type="radio" name='questB' id='questBChoix1' value="oui" checked={answers.answB==="oui"} 
             onChange={(event)=>saveAnswers(event, "answB")}/>
-            <label htmlFor='questBChoix2'> Non </label> 
+            <label htmlFor='questBChoix2'className={styles[reponseStyle]}> Non </label> 
             <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={answers.answB==="non"}  
             onChange={(event)=>saveAnswers(event, "answB")}/>
             <br/> 
 
             <label htmlFor='questC'>{questionsC[x][question]}</label> 
-            <select name="questCChoix1" id="questCChoix1" value={answC}
+            <select name="questCChoix1" id="questCChoix1" value={answC} className={styles[reponseStyle]}
             onChange={(event)=>saveAnswers(event, "answC")}> 
             {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}
             </select> 
