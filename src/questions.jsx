@@ -90,11 +90,11 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
     let tabAnswers= {"answA":"ter","answB":"erte","answC":questionsC[x].reponse[0]}
     const [answers,setAnswers]=useState(tabAnswers)  
     const [answers2,setAnswers2]=useState(tabAnswers)  
+    let [reponseB,setReponseB]=useState()
 
     function handleSubmit  (event) {
         event.preventDefault() ;
         if (showStatus.formFShowStatus==true) {
-            const answersMemo =  localStorage.getItem("answers")
             setQuestion("question2M")
             let nextShowStatus={...showStatus}
             nextShowStatus.formM2ShowStatus=true 
@@ -114,20 +114,25 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
 
     function saveAnswers(event,answer){
         if (showStatus.formFShowStatus==true) {
-           let nextAnswers={...answers}
-        nextAnswers[answer]=event.target.value
-        setAnswers(nextAnswers)
-        let answersText=JSON.stringify(nextAnswers)
-        localStorage.setItem("answers",answersText)
-        console.log("reponses1" , answersText) 
+            let nextAnswers={...answers}
+            nextAnswers[answer]=event.target.value
+            setAnswers(nextAnswers)
+            setReponseB(nextAnswers.answB)
+            let answersText=JSON.stringify(nextAnswers)
+            localStorage.setItem("answers",answersText)
+            console.log("reponses1" , answersText) 
+            console.log('reponseb est', reponseB)
         }
         else if (showStatus.formM2ShowStatus==true){
             let nextAnswers2={...answers2}
+           
         nextAnswers2[answer]=event.target.value
         setAnswers2(nextAnswers2)
+        setReponseB(nextAnswers2.answB)
         let answersText2=JSON.stringify(nextAnswers2)
         localStorage.setItem("answers2",answersText2)
         console.log("reponses2" , answersText2) 
+        console.log('reponseb est', reponseB)
         }
     }
 
@@ -145,10 +150,10 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
 
             <label htmlFor='questB'> {questionsB[x][question]}</label> 
             <label htmlFor='questBChoix1'className={styles[reponseStyle]}> Oui </label> 
-            <input type="radio" name='questB' id='questBChoix1' value="oui" checked={answers.answB==="oui"} 
+            <input type="radio" name='questB' id='questBChoix1' value="oui" checked={reponseB==="oui"} 
             onChange={(event)=>saveAnswers(event, "answB")}/>
             <label htmlFor='questBChoix2'className={styles[reponseStyle]}> Non </label> 
-            <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={answers.answB==="non"}  
+            <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={reponseB==="non"}  
             onChange={(event)=>saveAnswers(event, "answB")}/>
             <br/> 
 
