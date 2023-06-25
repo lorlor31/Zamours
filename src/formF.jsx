@@ -9,7 +9,7 @@ export function FormF ({nameMemo, answers, setAnswers,showStatus,setShowStatus, 
         <> 
         <div>
             Voilà, tu vas répondre aux 5 questions suivantes, et on va voir si ton jules te connait bien !
-        <Questions  question={question} setQuestion={setQuestion}  showStatus={showStatus} setShowStatus={setShowStatus}/>
+        <Questions  question="question" setQuestion={setQuestion}  showStatus={showStatus} setShowStatus={setShowStatus}/>
         </div>
         </>
     )

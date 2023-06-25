@@ -8,7 +8,7 @@ export let x =parseInt(Math.floor(Math.random()*10))
 let answA, answB, answC
 let reponseStyle="reponseNeutre"
 
-let questionsA = 
+export let questionsA = 
     [
         {"question" : "Quel est le prénom de ton père ?" ,"question2M" : "Quel est le prénom de son père ?" },
         {"question" :"Quel est le prénom de ta mère ?" ,"question2M" :"Quel est le prénom de sa mère ?" },
@@ -25,7 +25,7 @@ let questionsA =
         {"question" :"Quel est ton animal préféré ? " ,"question2M" :"Quel est son animal préféré ? "},
     ]
 
-let questionsB = 
+export let questionsB = 
     [
         {"question" : "Aimes-tu le vin ? " ,"question2M" : "Aime-t-elle le vin ? "} ,
         {"question" : "Aimes-tu le jazz ? " ,"question2M" : "Aime-t-elle le jazz ? "} ,
@@ -41,7 +41,7 @@ let questionsB =
         {"question" : "Aimes-tu lire ? " ,"question2M" : "Aime-t-elle lire ? "} ,
     ]
 
-let questionsC = 
+export let questionsC = 
     [
         {"question" : "Quel achat aimerais-tu faire prochainement ?" ,
         "question2M" : "Quel achat aimerait-elle faire prochainement ?" ,
@@ -100,15 +100,14 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             nextShowStatus.formM2ShowStatus=true 
             nextShowStatus.formFShowStatus=false  
             setShowStatus(nextShowStatus)
+            const answersMemo =  localStorage.setItem("answers")
         }
         else if (showStatus.formM2ShowStatus==true) {
-            const answersMemo =  localStorage.getItem("answers")
-            const answersMemo2 =  localStorage.getItem("answers2")
-            console.log("reponses mémoriséezF", answersMemo, "reponses mémoriséezM", answersMemo2 )
             let nextShowStatus={...showStatus}
             nextShowStatus.formM2ShowStatus=false 
             nextShowStatus.questionsSyntheseScore=true  
             setShowStatus(nextShowStatus)
+            const answersMemo2 =  localStorage.setItem("answers2")
         }
     }
 

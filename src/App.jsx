@@ -1,4 +1,5 @@
-
+//trucs qui clochent 
+//où déclarer les state ?? question(chx de la question en fct du sexe et de la position du qaire) notamment??
 import {useState} from 'react'
 import styles from './style.module.css'
 import {Identification} from"./identification"
@@ -15,7 +16,7 @@ function App(){
 	const [genre,setGenre]= useState("true")
 	const [answers,setAnswers]= useState("")
 	const [answers2,setAnswers2]= useState("")
-	const [question,setQuestion]=useState("question")
+	const [question,setQuestion]=useState("questionF")
 	
 
 	let tabShowStatus={
@@ -38,8 +39,8 @@ function App(){
 	<Genre genre={genre} setGenre={setGenre} showStatus={showStatus} setShowStatus={setShowStatus}/>
 	<FormF question="question" setQuestion={setQuestion}  nameMemo={nameMemo} answers={answers} setAnswers={setAnswers} showStatus={showStatus} setShowStatus={setShowStatus}/>  
 	<FormM2 question="question2M" setQuestion={setQuestion}   answers={answers} setAnswers={setAnswers} showStatus={showStatus} setShowStatus={setShowStatus}/>  
-	<QuestionsSyntheseScore answers={answers} answers2={answers2} showStatus={showStatus} setShowStatus={setShowStatus}/>
-	<Score answers={answers} answers2={answers2} showStatus={showStatus} setShowStatus={setShowStatus}/>
+	<QuestionsSyntheseScore answers={answers} answers2={answers2} genre={genre} showStatus={showStatus} setShowStatus={setShowStatus}/>
+	{/* <Score answers={answers} answers2={answers2} showStatus={showStatus} setShowStatus={setShowStatus}/> */}
 	</div> 
 	)
 
