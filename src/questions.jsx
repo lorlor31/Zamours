@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import styles from './style.module.css'
+import { readOnly } from 'tone/build/esm/core/util/Interface'
 
-//a noter : ne pas déclarer toutes les variables à l'inter du composant, baanane
+
+//B noter : ne pas déclarer toutes les variables à l'inter du composant, baanane
 // bien initialiser le state de type "select" avec une valeur d'une des options 
 export let x =parseInt(Math.floor(Math.random()*10))
 
@@ -82,15 +84,17 @@ export let questionsC =
         
     ]
 
-export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
-    
-    const answersMemo =  localStorage.getItem("answers")
-    // Déclaration des states crrspdts aux réponses
+export function Questions ({question,setQuestion, answers,setAnswers,answers2,setAnswers2,showStatus,setShowStatus } ) {
 
-    let tabAnswers= {"answA":"ter","answB":"erte","answC":questionsC[x].reponse[0]}
-    const [answers,setAnswers]=useState(tabAnswers)  
-    const [answers2,setAnswers2]=useState(tabAnswers)  
-    let [reponseB,setReponseB]=useState()
+    // Recuperation des reponses et Déclaration des states crrspdts aux réponses
+
+
+    // let answersDef=localStorage.getItem("answers")
+    // let answers2Def=localStorage.getItem("answers2")
+    // if (answersDef=="") {answersDef=tabAnswers }
+    // if (answers2Def=="") {answers2Def=tabAnswers }
+
+    let [reponseB,setReponseB]=useState() // variable pour memoriser le check de la reponse B
 
     function handleSubmit  (event) {
         event.preventDefault() ;
@@ -100,14 +104,15 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             nextShowStatus.formM2ShowStatus=true 
             nextShowStatus.formFShowStatus=false  
             setShowStatus(nextShowStatus)
-            const answersMemo =  localStorage.setItem("answers")
+            console.log("reponses1" , answers) 
+            
         }
         else if (showStatus.formM2ShowStatus==true) {
             let nextShowStatus={...showStatus}
             nextShowStatus.formM2ShowStatus=false 
             nextShowStatus.questionsSyntheseScore=true  
             setShowStatus(nextShowStatus)
-            const answersMemo2 =  localStorage.setItem("answers2")
+            console.log("reponses2" , answers2) 
         }
     }
 
@@ -117,21 +122,19 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
             nextAnswers[answer]=event.target.value
             setAnswers(nextAnswers)
             setReponseB(nextAnswers.answB)
+            console.log("reponses1" , nextAnswers) 
+           
             let answersText=JSON.stringify(nextAnswers)
             localStorage.setItem("answers",answersText)
-            console.log("reponses1" , answersText) 
-            console.log('reponseb est', reponseB)
         }
         else if (showStatus.formM2ShowStatus==true){
             let nextAnswers2={...answers2}
-           
-        nextAnswers2[answer]=event.target.value
-        setAnswers2(nextAnswers2)
-        setReponseB(nextAnswers2.answB)
-        let answersText2=JSON.stringify(nextAnswers2)
-        localStorage.setItem("answers2",answersText2)
-        console.log("reponses2" , answersText2) 
-        console.log('reponseb est', reponseB)
+            nextAnswers2[answer]=event.target.value
+            setAnswers2(nextAnswers2)
+            setReponseB(nextAnswers2.answB)
+            console.log("reponses2" , nextAnswers2) 
+            let answersText2=JSON.stringify(nextAnswers2)
+            localStorage.setItem("answers2",answersText2)
         }
     }
 
@@ -143,7 +146,8 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
         <form onSubmit={handleSubmit} className={styles.questions}>
 
             <label htmlFor='questA'> {questionsA[x][question]}</label> 
-            <input type="text" id='questA' value={answA} className={styles[reponseStyle]}//à rectifier mais comment
+            <input type="text" id='questA' value={answA} 
+            className={styles[reponseStyle]}//à rectifier mais comment
             onChange={(event)=>saveAnswers(event, "answA")}/>
             <br/> 
 
@@ -169,4 +173,91 @@ export function Questions ({question,setQuestion, showStatus,setShowStatus} ) {
         
         </> 
     )
+}
+
+
+// Copie du questionnaire avec réponses remplies et readonly
+        
+export function QuestionsRemplies ({question, reponseAAfficher, answers,answers2})  {
+ 
+    //créer un constructor pour objet reponse
+    class Reponse {
+
+        constructor ( nom, reponseStyle,reponseAttendue) {
+        this.nom=nom ;
+        this.reponseStyle=reponseStyle ;
+        this.reponseAttendue=reponseAttendue ;
+        }
+    }
+    // créer les objets reponse
+    let answA = new Reponse ("answA","reponseSccwxtyle","reponseAttendue" )
+    let answB = new Reponse ("answB","reponseStyle","reponseAttendue" )
+    let answC = new Reponse ("answC","reponseStyle","reponseAttendue" )
+
+    //calcul du style des reponses selon vrai ou faux
+    let reponsesStyles = [answA,answB, answC ] 
+    let reponsesStylesKeys = ["answA","answB", "answC" ] 
+    let answersKeys=Object.keys(answers)
+    function calculReponsesStyles() {
+        for (let reponse of reponsesStyles) {
+            //console.log ("la reponse est", answers[reponse.nom])
+            if (answers[reponse.nom]==answers2[reponse.nom]) {
+                console.log("vsd")
+            reponse.reponseStyle="reponseBonne" ;
+            reponse.reponseAttendue="reponseAttendueCachee"
+            }
+            else if (answers[reponse.nom]!=answers2[reponse.nom]){
+                reponse.reponseStyle="reponseMauvaise" ;
+                reponse.reponseAttendue="reponseAttendueVisible"
+                
+            }
+
+        }
+        
+        return reponsesStyles
+        
+    }
+    
+    calculReponsesStyles()
+    console.log("cc",answA.reponseStyle)
+  
+        return (    
+        <> 
+        <form className={styles.questions} >
+
+            <label htmlFor='questA'> {questionsA[x][question]}</label> 
+            <input type="text" id='questA' value={reponseAAfficher.answA} 
+            className={styles[reponsesStyles[0].reponseStyle]} 
+            readOnly/>
+            <span className={styles[reponsesStyles[0].reponseAttendue]}> Il fallait répondre {answers.answA}! </span>
+            <br/> 
+
+            <label htmlFor='questB'> {questionsB[x][question]}</label> 
+            <label htmlFor='questBChoix1'
+            className={styles[reponsesStyles[1].reponseStyle]} > Oui </label> 
+            <input type="radio" name='questB' id='questBChoix1' value="oui" checked={reponseAAfficher.answB==="oui"} 
+            readOnly/>
+            <label htmlFor='questBChoix2'
+            className={styles[reponsesStyles.answB]} > Non </label> 
+            <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={reponseAAfficher.answB==="non"}  
+            readOnly/>
+            <span className={styles[reponsesStyles[1].reponseAttendue]}> Il fallait répondre {answers.answB}! </span>
+            <br/> 
+
+            <label htmlFor='questC'>{questionsC[x][question]}</label> 
+            <select name="questCChoix1" id="questCChoix1" value={reponseAAfficher.answC} 
+            className={styles[reponsesStyles[2].reponseStyle]} 
+            readOnly> 
+            {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}
+            </select> 
+            <span className={styles[reponsesStyles[2].reponseAttendue]}> Il fallait répondre {answers.answC}! </span>
+            <br/> 
+
+            
+
+        </form>
+        
+        </> 
+    )
+
 }

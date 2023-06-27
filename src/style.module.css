@@ -98,6 +98,27 @@ label{
 }
 
 .reponseNeutre {
-    background-color: rgb(250, 118, 140) ;
+    background-color: rgb(67, 45, 79) ;
     
+}
+
+
+.reponseBonne{
+    background-color: rgb(50, 232, 5) ;
+    
+}
+
+.reponseMauvaise{
+    background-color: rgb(255, 0, 0) ;
+    
+}
+
+.reponseAttendueCachee{
+    display: none;
+    background-color: rgb(249, 9, 9) ;
+}
+
+.reponseAttendueVisible{
+    display :block ;
+    background-color: rgb(249, 9, 9) ;
 }

@@ -8,18 +8,12 @@
 //answer answer2 question
 
 
-
-
-
-
-
-
 // import { useState } from 'react'
 // import styles from './style.module.css'
 // import { Questions} from './questions'
 // import {x, questionsA} from './questions'
 
-// export function Score ({answers,answers2}) {
+ export function Score ({answers,answers2}) {
 //     const answersMemo =  localStorage.getItem("answers2")
 //     const answersMemo2 =  localStorage.getItem("answers2")
 //     let question="question"
@@ -62,6 +56,6 @@
 
 
 
-// }
+}
 
 
