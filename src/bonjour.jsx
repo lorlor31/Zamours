@@ -8,11 +8,11 @@ export function Bonjour ({nameMemo, showStatus,setShowStatus}) {
     return (
         showStatus.bonjourShowStatus==false ? null :  
         <>
-        <div className={styles.bonjour}>
-            <p> 
-                <span> Bonjour {nameMemo} !</span>
-            </p>    
-        </div>
+        
+                <p className={styles.bonjour}> Bonjour <span>{nameMemo} </span> !</p>
+                <br/>
+           
+        
         
         </>
     )

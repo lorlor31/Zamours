@@ -8,11 +8,14 @@ export function FormF ({nameMemo, answers, setAnswers,showStatus,setShowStatus, 
     showStatus.formFShowStatus==false ? null :   
         <> 
         <div>
+            <header>
             Voilà, tu vas répondre aux 5 questions suivantes, et on va voir si ton jules te connait bien !
-        <Questions  question="question" setQuestion={setQuestion}  
-                    showStatus={showStatus} setShowStatus={setShowStatus} 
-                    answers={answers} setAnswers={setAnswers}
-                    />
+            </header>
+
+            <Questions  question="question" setQuestion={setQuestion}  
+                        showStatus={showStatus} setShowStatus={setShowStatus} 
+                        answers={answers} setAnswers={setAnswers}
+            />
         </div>
         </>
     )

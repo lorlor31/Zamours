@@ -86,15 +86,8 @@ export let questionsC =
 
 export function Questions ({question,setQuestion, answers,setAnswers,answers2,setAnswers2,showStatus,setShowStatus } ) {
 
-    // Recuperation des reponses et Déclaration des states crrspdts aux réponses
 
-
-    // let answersDef=localStorage.getItem("answers")
-    // let answers2Def=localStorage.getItem("answers2")
-    // if (answersDef=="") {answersDef=tabAnswers }
-    // if (answers2Def=="") {answers2Def=tabAnswers }
-
-    let [reponseB,setReponseB]=useState() // variable pour memoriser le check de la reponse B
+    let [reponseB,setReponseB]=useState("") // variable pour memoriser le check de la reponse B
 
     function handleSubmit  (event) {
         event.preventDefault() ;
@@ -143,30 +136,37 @@ export function Questions ({question,setQuestion, answers,setAnswers,answers2,se
         
         //showStatus.questionsShowStatus==false ? null : 
         <> 
-        <form onSubmit={handleSubmit} className={styles.questions}>
+        <form onSubmit={handleSubmit} >
 
             <label htmlFor='questA'> {questionsA[x][question]}</label> 
             <input type="text" id='questA' value={answA} 
-            className={styles[reponseStyle]}//à rectifier mais comment
+            className={styles[reponseStyle]}
             onChange={(event)=>saveAnswers(event, "answA")}/>
-            <br/> 
 
-            <label htmlFor='questB'> {questionsB[x][question]}</label> 
-            <label htmlFor='questBChoix1'className={styles[reponseStyle]}> Oui </label> 
-            <input type="radio" name='questB' id='questBChoix1' value="oui" checked={reponseB==="oui"} 
-            onChange={(event)=>saveAnswers(event, "answB")}/>
-            <label htmlFor='questBChoix2'className={styles[reponseStyle]}> Non </label> 
-            <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={reponseB==="non"}  
-            onChange={(event)=>saveAnswers(event, "answB")}/>
-            <br/> 
+            
+            <label htmlFor='questB' > {questionsB[x][question]}</label> 
+                <div className={styles.reponsesChoixRadio}>
+                    <div className={styles.reponseChoixRadio}>
+                        <input type="radio" name='questB' id='questBChoix1' value="oui" checked={reponseB==="oui"} 
+                    onChange={(event)=>saveAnswers(event, "answB")}/>
+                        <label htmlFor='questBChoix1'className={styles[reponseStyle]}> Oui </label> 
+                    
+                    </div>
 
+                    <div className={styles.reponseChoixRadio}>
+                        <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={reponseB==="non"}  
+                    onChange={(event)=>saveAnswers(event, "answB")}/>
+                        <label htmlFor='questBChoix2'className={styles[reponseStyle]}> Non </label> 
+                    </div>
+                </div>
+  
             <label htmlFor='questC'>{questionsC[x][question]}</label> 
             <select name="questCChoix1" id="questCChoix1" value={answC} className={styles[reponseStyle]}
             onChange={(event)=>saveAnswers(event, "answC")}> 
             {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}
             </select> 
-            <br/> 
 
+<br/>
             <button onSubmit={handleSubmit}> Valider !</button>
 
         </form>
@@ -202,7 +202,6 @@ export function QuestionsRemplies ({question, reponseAAfficher, answers,answers2
         for (let reponse of reponsesStyles) {
             //console.log ("la reponse est", answers[reponse.nom])
             if (answers[reponse.nom]==answers2[reponse.nom]) {
-                console.log("vsd")
             reponse.reponseStyle="reponseBonne" ;
             reponse.reponseAttendue="reponseAttendueCachee"
             }
@@ -219,7 +218,6 @@ export function QuestionsRemplies ({question, reponseAAfficher, answers,answers2
     }
     
     calculReponsesStyles()
-    console.log("cc",answA.reponseStyle)
   
         return (    
         <> 
@@ -230,7 +228,7 @@ export function QuestionsRemplies ({question, reponseAAfficher, answers,answers2
             className={styles[reponsesStyles[0].reponseStyle]} 
             readOnly/>
             <span className={styles[reponsesStyles[0].reponseAttendue]}> Il fallait répondre {answers.answA}! </span>
-            <br/> 
+
 
             <label htmlFor='questB'> {questionsB[x][question]}</label> 
             <label htmlFor='questBChoix1'
@@ -242,7 +240,7 @@ export function QuestionsRemplies ({question, reponseAAfficher, answers,answers2
             <input type="radio" name="questBChoix2" id="questBChoix2" value="non" checked={reponseAAfficher.answB==="non"}  
             readOnly/>
             <span className={styles[reponsesStyles[1].reponseAttendue]}> Il fallait répondre {answers.answB}! </span>
-            <br/> 
+
 
             <label htmlFor='questC'>{questionsC[x][question]}</label> 
             <select name="questCChoix1" id="questCChoix1" value={reponseAAfficher.answC} 
@@ -251,7 +249,7 @@ export function QuestionsRemplies ({question, reponseAAfficher, answers,answers2
             {questionsC[x].reponse.map((option)=> <option value={option} key={option}>{option} </option> )}
             </select> 
             <span className={styles[reponsesStyles[2].reponseAttendue]}> Il fallait répondre {answers.answC}! </span>
-            <br/> 
+
 
             
 

@@ -14,8 +14,8 @@ function App(){
 	const nameMemo =  localStorage.getItem("name")
 	const [name,setName]=useState('');
 	const [genre,setGenre]= useState("true")
-	let tabAnswers= {"answA":"coucou","answB":"oui","answC":"àchanger"}
-	let tabAnswers2= {"answA":"coucou","answB":"non","answC":"àchanger"}
+	let tabAnswers= {"answA":"coucou","answB":"","answC":"àchanger"}
+	let tabAnswers2= {"answA":"coucou","answB":"","answC":"àchanger"}
     const [answers,setAnswers]=useState(tabAnswers)  
     const [answers2,setAnswers2]=useState(tabAnswers2)  
 	const [question,setQuestion]=useState("questionF")
@@ -27,18 +27,16 @@ function App(){
 		"formFShowStatus" : false,
 		"formMShowStatus" : false,
 		"formM2ShowStatus" : false ,
-		"questionsSyntheseScore" : true
+		"questionsSyntheseScore" : false,
+		"scoreShowStatus" : false
 	}
 	const [showStatus,setShowStatus]=useState(tabShowStatus)
-
-
-	//console.log (tabAnswers.answB)
 	return (
 		
 	<div className={styles.main}>
 	{/* à mettre entre accolades pour travailler que sur le questionnaire  */}
-	 {/* <Identification name={name} setName={setName} showStatus={showStatus} setShowStatus={setShowStatus} />
-	<Bonjour nameMemo={nameMemo} showStatus={showStatus} setShowStatus={setShowStatus}  />
+	<Identification name={name} setName={setName} showStatus={showStatus} setShowStatus={setShowStatus} />
+	
 	<Genre genre={genre} setGenre={setGenre} showStatus={showStatus} setShowStatus={setShowStatus}/>
 	<FormF 	question="question" setQuestion={setQuestion}  
 			nameMemo={nameMemo} 
@@ -46,14 +44,14 @@ function App(){
 			showStatus={showStatus} setShowStatus={setShowStatus}/>  
 	<FormM2 question="question2M" setQuestion={setQuestion}   
 			answers2={answers2} setAnswers2={setAnswers2} 
-			showStatus={showStatus} setShowStatus={setShowStatus}/>   */}
+			showStatus={showStatus} setShowStatus={setShowStatus}/>   
 	<QuestionsSyntheseScore 
 			question={question} setQuestion={setQuestion}   
 			answers={answers} setAnswers={setAnswers}
 			answers2={answers2} setAnswers2={setAnswers2}
 			genre={genre} 
 			showStatus={showStatus} setShowStatus={setShowStatus}/>
-	<Score answers={answers} answers2={answers2} showStatus={showStatus} setShowStatus={setShowStatus}/> 
+	
 	</div> 
 
 	)
